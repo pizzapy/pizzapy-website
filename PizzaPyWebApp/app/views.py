@@ -62,8 +62,10 @@ def get_access_token(request, code):
         return response.json().get('access_token')
     else:
         return None
+    
 
 def fetch_events(query, token, variables):
+    
     url = 'https://api.meetup.com/gql'
     headers = {"Authorization": "Bearer " + token}
     response = requests.post(url, json={"query": query, "variables": variables}, headers=headers)
@@ -71,6 +73,117 @@ def fetch_events(query, token, variables):
         return response.json()
     else:
         return None
+    
+    # Replace with actual fetch logic
+    return {
+        "data": {
+            "groupByUrlname": {
+                "upcomingEvents": {
+                    "edges": [
+                        {
+                            "node": {
+                                "id": "1",
+                                "title": "Event 1",
+                                "description": "Description of Event 1",
+                                "eventType": "Type 1",
+                                "images": [{"source": "https://via.placeholder.com/748x498.png?text=Event+1"}],
+                                "venue": {
+                                    "address": "123 Street",
+                                    "city": "City 1",
+                                    "postalCode": "12345"
+                                },
+                                "createdAt": "2024-06-01T00:00:00Z",
+                                "dateTime": "2024-06-15T18:00:00Z",
+                                "endTime": "2024-06-15T20:00:00Z",
+                                "timezone": "UTC",
+                                "going": 100,
+                                "shortUrl": "https://example.com/event1",
+                                "host": {
+                                    "name": "Host 1",
+                                    "username": "host1",
+                                    "email": "host1@example.com",
+                                    "memberPhoto": {
+                                        "id": "1",
+                                        "baseUrl": "https://example.com/",
+                                        "preview": "https://example.com/preview1.jpg",
+                                        "source": "https://example.com/source1.jpg"
+                                    },
+                                    "memberUrl": "https://example.com/member1",
+                                    "organizedGroupCount": 5
+                                }
+                            }
+                        },
+                        {
+                            "node": {
+                                "id": "2",
+                                "title": "Event 2",
+                                "description": "Description of Event 2",
+                                "eventType": "Type 2",
+                                "images": [{"source": "https://via.placeholder.com/748x498.png?text=Event+2"}],
+                                "venue": {
+                                    "address": "456 Avenue",
+                                    "city": "City 2",
+                                    "postalCode": "67890"
+                                },
+                                "createdAt": "2024-06-02T00:00:00Z",
+                                "dateTime": "2024-06-16T18:00:00Z",
+                                "endTime": "2024-06-16T20:00:00Z",
+                                "timezone": "UTC",
+                                "going": 200,
+                                "shortUrl": "https://example.com/event2",
+                                "host": {
+                                    "name": "Host 2",
+                                    "username": "host2",
+                                    "email": "host2@example.com",
+                                    "memberPhoto": {
+                                        "id": "2",
+                                        "baseUrl": "https://example.com/",
+                                        "preview": "https://example.com/preview2.jpg",
+                                        "source": "https://example.com/source2.jpg"
+                                    },
+                                    "memberUrl": "https://example.com/member2",
+                                    "organizedGroupCount": 10
+                                }
+                            }
+                        },
+                        {
+                            "node": {
+                                "id": "3",
+                                "title": "Event 3",
+                                "description": "Description of Event 3",
+                                "eventType": "Type 2",
+                                "images": [{"source": "https://via.placeholder.com/748x498.png?text=Event+3"}],
+                                "venue": {
+                                    "address": "456 Avenue",
+                                    "city": "City 2",
+                                    "postalCode": "67890"
+                                },
+                                "createdAt": "2024-06-02T00:00:00Z",
+                                "dateTime": "2024-06-16T18:00:00Z",
+                                "endTime": "2024-06-16T20:00:00Z",
+                                "timezone": "UTC",
+                                "going": 200,
+                                "shortUrl": "https://example.com/event2",
+                                "host": {
+                                    "name": "Host 2",
+                                    "username": "host2",
+                                    "email": "host2@example.com",
+                                    "memberPhoto": {
+                                        "id": "2",
+                                        "baseUrl": "https://example.com/",
+                                        "preview": "https://example.com/preview2.jpg",
+                                        "source": "https://example.com/source2.jpg"
+                                    },
+                                    "memberUrl": "https://example.com/member2",
+                                    "organizedGroupCount": 10
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
 
 def extract_events(data, event_timeline):
     return data.get("data", {}).get("groupByUrlname", {}).get(event_timeline, {}).get("edges", [])
@@ -79,6 +192,16 @@ def extract_events(data, event_timeline):
 def get_upcoming_events(request, group_name=None):
     if not group_name:
         group_name = "pizzapy-ph"
+
+    # Simulating failed data retrieval by setting events_json to an empty array and providing an error message
+    # return render(request, 'event_page_test2.html', {'error_message': 'Failed to retrieve events', 'events_json': '[]'})
+    
+
+    # # Simulating no data received by setting events_json to an empty array
+    # return render(request, 'event_page_test2.html', {
+    #     'no_events': 'No upcoming events found', 
+    #     'events_json': '[]'
+    # })
     upcoming_events_query = """
     query ($urlname: String!) {
         groupByUrlname(urlname: $urlname) {
@@ -142,9 +265,9 @@ def get_upcoming_events(request, group_name=None):
             other_events = [event["node"] for event in events[1:]]
             return render(request, 'event_page_test2.html', {'first_event': first_event, 'other_events': other_events})
         else:
-            return HttpResponse("No upcoming events found", status=404)
+            return render(request, 'event_page_test2.html', {'error_message': 'No upcoming events found', 'events_json': '[]'})
     else:
-        return HttpResponse("Failed to retrieve events", status=400)
+        return render(request, 'event_page_test2.html', {'error_message': 'Failed to retrieve events', 'events_json': '[]'})
 
 
 def event_dispatcher(request, event_timeline, group_name=None):

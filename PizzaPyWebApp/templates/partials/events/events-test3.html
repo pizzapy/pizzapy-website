@@ -1,0 +1,75 @@
+<div class="container px-4 py-12 mx-auto sm:px-8 lg:px-16">
+    <div class="flex items-center justify-between mb-8">
+        <h1 class="text-4xl font-bold">Upcoming Events</h1>
+        <a href="https://www.meetup.com/pizzapy-ph/events/" target="_blank" class="text-yellow-400 hover:underline">See
+            all on Meetup &rarr;</a>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 min-h-[200px] flex items-center justify-center"
+        id="event-cards">
+        {% if error_message %}
+        <div class="col-span-3 text-center">
+            <!-- <p class="text-red-600 text-2xl font-bold">{{ error_message }}</p> -->
+            <p class="text-gray-600 text-2xl font-bold">{{ error_message }}</p>
+        </div>
+        {% elif not other_events %}
+        <div class="col-span-3 text-center">
+            <p class="text-gray-600 text-2xl font-bold">No upcoming events found</p>
+        </div>
+        {% else %}
+        <!-- Loop through other_events to generate event cards -->
+        {% for event in other_events %}
+        <a href="{{ event.shortUrl }}"
+            class="bg-white text-black rounded-lg shadow-md w-full no-underline hover:no-underline transform hover:shadow-lg hover:-translate-y-1 transition-transform duration-200"
+            target="_blank">
+            <div class="relative h-40">
+                <img src="{{ event.images.0.source }}" alt="{{ event.title }}"
+                    class="object-cover w-full h-full rounded-t-lg">
+            </div>
+            <div class="p-4">
+                <div class="flex items-start mb-2">
+                    <img src="{{ event.host.memberPhoto.source }}" alt="Host Image"
+                        class="flex-shrink-0 w-10 h-10 mr-2 rounded-full">
+                    <div class="flex-1 min-w-0 text-sm tooltip">
+                        <p class="mb-1 font-semibold text-gray-900 truncate">{{ event.title }}</p>
+                        <span class="tooltip-text">{{ event.title }}</span>
+                        <p class="text-gray-600 truncate">Hosted by {{ event.host.name }} </p>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+<style>
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .tooltip .tooltip-text {
+        visibility: hidden;
+        width: max-content;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 5px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        /* Position above the element */
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .tooltip:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+    }
+</style>
