@@ -1,3 +1,4 @@
+<!-- prettier-ignore -->
 {% extends 'base.html' %}
 
 {% block title %}
@@ -7,13 +8,15 @@ PizzaPy Cebu Python Users Group
 {% block content %}
 {% include 'partials/header.html' %}
 <!-- <div class="relative flex flex-col items-center w-full min-h-screen bg-gray-50 dark:bg-gray-900"> -->
+<!-- prettier-ignore -->
 {% include 'partials/landing/hero.html' %}
 {% include 'partials/landing/about_us.html' %}
+{% include 'partials/landing/experts.html' %}
 {% include 'partials/landing/sponsors.html' %}
 {% include 'partials/landing/cta.html' %}
 <!-- </div> -->
 {% endblock %}
-
+<!-- prettier-ignore -->
 {% block footer %}
 {% include 'partials/footer.html' %}
 {% endblock %}

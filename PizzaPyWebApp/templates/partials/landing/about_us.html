@@ -1,49 +1,92 @@
-<div class="py-12 px-8 sm:px-12 md:px-16 lg:px-24 xl:px-32">
-    <div class="container mx-auto grid grid-cols-1 xl:grid-cols-2 gap-8">
-        <!-- Text Content Section -->
-        <div>
-            <h2 class="text-lg font-bold text-yellow-500">ABOUT US</h2>
-            <h1 class="text-4xl font-bold">Get to know us.</h1>
-            <p class="mt-4 text-xl">
-                Numbered among us are team members from various tech companies, students, freelancers, instructors, and
-                individuals from other industries. As a community, our main focus is on sharing knowledge. We share
-                solutions and discuss problems.
-            </p>
-            <h3 class="mt-8 text-2xl font-semibold">We have experts in:</h3>
-            <ul id="experts-list" class="grid grid-cols-1 gap-4 mt-4 text-lg list-none sm:grid-cols-2 lg:grid-cols-3">
-                <!-- List items will be populated here by JavaScript -->
-            </ul>
-            <a href="https://www.facebook.com/groups/pizzapy.ph/" target="_blank" rel="noopener noreferrer"
-                class="inline-block px-6 py-3 mt-8 text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50">
-                About Us
-            </a>
-        </div>
-        <!-- Image Section -->
-        <div class="relative overflow-hidden flex items-center justify-center">
-            <img src="../../../static/images/group.png" alt="Team Photo"
-                class="w-full h-auto xl:w-[90%] xl:max-w-none rounded-lg shadow-lg">
-        </div>
-    </div>
-</div>
+<div style="margin-bottom: 120px">
+  <div class="flex-col">
+    <h2 class="text-4xl font-bold text-yellow-500 text-center">ABOUT US</h2>
+  </div>
 
+  <div class="py-12 px-8 sm:px-12 md:px-16 lg:px-24 xl:px-32">
+    <div
+      class="container mx-auto grid grid-cols-1 lg:grid-cols-2 lg:gap-8 space-x-4"
+      style="gap: 10px"
+    >
+      <!-- Image Section -->
+      <div
+        class="relative overflow-hidden flex items-center justify-center mb-4"
+      >
+        <div class="slideshow-container relative p-2" style="width: 500px">
+          <img
+            src="../../../static/images/events/group.png"
+            alt="Event 3"
+            class="slide rounded-lg transition-opacity duration-700 inset-0 opacity-0"
+          />
+          <img
+            src="../../../static/images/events/Event-2.png"
+            alt="Event 2"
+            class="slide rounded-lg transition-opacity duration-700 absolute inset-0 opacity-0"
+          />
+          <img
+            src="../../../static/images/events/Event-3.png"
+            alt="Event 3"
+            class="slide rounded-lg transition-opacity duration-700 absolute inset-0 opacity-0"
+          />
+          <img
+            src="../../../static/images/events/Event-4.jpg"
+            alt="Event 4"
+            class="slide rounded-lg transition-opacity duration-700 absolute inset-0 opacity-0"
+          />
+          <img
+            src="../../../static/images/events/Event-5.jpg"
+            alt="Event 5"
+            class="slide rounded-lg transition-opacity duration-700 absolute inset-0 opacity-0"
+          />
+          <img
+            src="../../../static/images/events/Event-8.png"
+            alt="Event 8"
+            class="slide rounded-lg transition-opacity duration-700 absolute inset-0 opacity-0"
+          />
+        </div>
+      </div>
+      <!-- Text Content Section -->
+      <div>
+        <h1 class="md:mt-4 lg:text-4xl text-xl font-bold">
+          We share solutions and discuss problems.
+        </h1>
+        <p class="mt-8 sm:mt-4 text-md font-sans text-gray-200">
+          Numbered among us are team members from various tech companies,
+          students, freelancers, instructors, and individuals from other
+          industries. As a community, our main focus is on sharing knowledge.
+        </p>
+
+        <a
+          href="https://www.facebook.com/groups/pizzapy.ph/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block px-6 py-3 mt-8 text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50"
+        >
+          Get To Know Us
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        fetch('../../../static/data/lang.json')
-            .then(response => response.json())
-            .then(data => {
-                const expertsList = document.getElementById('experts-list');
-                data.forEach(expert => {
-                    const listItem = document.createElement('li');
-                    listItem.className = 'flex items-center';
-                    listItem.innerHTML = `
-                            <svg fill="none" class="w-5 h-5 text-yellow-500" viewBox="0 0 24 24">
-                                <use xlink:href="../../../static/css/icons.svg#checks"></use>
-                            </svg>
-                            <span class="ml-2">${expert.expertise}</span>
-                        `;
-                    expertsList.appendChild(listItem);
-                });
-            })
-            .catch(error => console.error('Error fetching experts:', error));
-    });
+  let slideIndex = 0;
+  showSlides();
+
+  function showSlides() {
+    const slides = document.getElementsByClassName("slide");
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.opacity = "0";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {
+      slideIndex = 1;
+    }
+    slides[slideIndex - 1].style.opacity = "1";
+    setTimeout(showSlides, 3000);
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const slides = document.getElementsByClassName("slide");
+    slides[0].style.opacity = "1";
+  });
 </script>

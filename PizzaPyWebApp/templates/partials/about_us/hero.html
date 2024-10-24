@@ -1,23 +1,87 @@
-<div class="relative flex flex-col items-center justify-center w-full min-h-screen">
-    <img src="../../static/images/python-3d.png" alt="PizzaPy Logo"
-        class="absolute scale-[1.5] md:scale-[2.0] lg:scale-[3.5] rotate-[11deg] opacity-30 blur-xl -z-50 lg:right-[30%]" />
-    <div class="flex flex-col items-center gap-10 p-6 sm:gap-20 md:p-28">
-        <div class="flex flex-col items-center w-full">
-            <p class="text-4xl font-extrabold text-center text-base-content sm:text-6xl md:text-7xl">
-                A
-                Python Users Group</p>
-            <h2 class="text-4xl font-extrabold text-center text-yellow-500 sm:text-6xl md:text-7xl">
-                based in Cebu, Philippines</h2>
-        </div>
-        <p class="w-full text-sm text-center dark:text-gray-300 sm:w-3/4 sm:text-base md:text-lg">
-            We are a vibrant community of Python enthusiasts in Cebu, Philippines. Our diverse membership includes
-            Professionals,
-            Students, Career-Shifters, Enthusiasts, and many other people in all walks of life. All with a common
-            interest on Python
-            and Tech.
-        </p>
+<div
+  class="relative flex flex-col items-center justify-center w-full min-h-screen"
+>
+  <img
+    src="../../static/images/python-3d.png"
+    alt="PizzaPy Logo"
+    class="absolute scale-[1.5] md:scale-[2.0] lg:scale-[3.5] rotate-[11deg] opacity-30 blur-xl -z-50 lg:right-[30%]"
+  />
+  <div class="flex flex-col items-center gap-10 p-6 sm:gap-20 md:p-28">
+    <div class="flex flex-col items-center w-full">
+      <p
+        class="text-4xl font-extrabold text-center text-base-content sm:text-6xl md:text-7xl"
+      >
+        A Python Users Group
+      </p>
+      <h2
+        class="text-4xl font-extrabold text-center text-yellow-500 sm:text-6xl md:text-7xl"
+      >
+        based in Cebu, Philippines
+      </h2>
     </div>
-    <div class="flex justify-center p-4 ">
-        <img src="../../../static/images/group.png" alt="Team Photo" class="w-full rounded-lg shadow-lg">
+    <p
+      class="w-full text-sm text-center dark:text-gray-300 sm:w-3/4 sm:text-base md:text-lg"
+    >
+      We are a vibrant community of Python enthusiasts in Cebu, Philippines. Our
+      diverse membership includes Professionals, Students, Career-Shifters,
+      Enthusiasts, and many other people in all walks of life. All with a common
+      interest on Python and Tech.
+    </p>
+  </div>
+  <div class="flex justify-center p-4">
+    <div class="slideshow-container relative p-2" style="width: 600px">
+      <img
+        src="../../../static/images/events/group.png"
+        alt="Event 3"
+        class="slide rounded-lg transition-opacity duration-700 inset-0 opacity-0"
+      />
+      <img
+        src="../../../static/images/events/Event-2.png"
+        alt="Event 2"
+        class="slide rounded-lg transition-opacity duration-700 absolute inset-0 opacity-0"
+      />
+      <img
+        src="../../../static/images/events/Event-3.png"
+        alt="Event 3"
+        class="slide rounded-lg transition-opacity duration-700 absolute inset-0 opacity-0"
+      />
+      <img
+        src="../../../static/images/events/Event-4.jpg"
+        alt="Event 4"
+        class="slide rounded-lg transition-opacity duration-700 absolute inset-0 opacity-0"
+      />
+      <img
+        src="../../../static/images/events/Event-5.jpg"
+        alt="Event 5"
+        class="slide rounded-lg transition-opacity duration-700 absolute inset-0 opacity-0"
+      />
+      <img
+        src="../../../static/images/events/Event-8.png"
+        alt="Event 8"
+        class="slide rounded-lg transition-opacity duration-700 absolute inset-0 opacity-0"
+      />
     </div>
+  </div>
 </div>
+<script>
+  let slideIndex = 0;
+  showSlides();
+
+  function showSlides() {
+    const slides = document.getElementsByClassName("slide");
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.opacity = "0";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {
+      slideIndex = 1;
+    }
+    slides[slideIndex - 1].style.opacity = "1";
+    setTimeout(showSlides, 3000);
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const slides = document.getElementsByClassName("slide");
+    slides[0].style.opacity = "1";
+  });
+</script>

@@ -1,0 +1,144 @@
+<div class="min-h-screen">
+  <div class="flex-col space-y-4" style="margin-bottom: 50px">
+    <h2 class="text-4xl font-bold text-yellow-500 text-center">OUR EXPERTS</h2>
+  </div>
+  <div>
+    <div class="grid-container" id="experts-grid">
+      <!-- Expert cards will be generated here -->
+    </div>
+  </div>
+  <div style="height: 120px"></div>
+</div>
+
+<script>
+  fetch("../../../static/data/experts.json")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const expertsGrid = document.getElementById("experts-grid");
+
+      data.experts.forEach((expert) => {
+        if (expert.name && expert.image && expert.link) {
+          const expertCard = document.createElement("a");
+          expertCard.href = expert.link;
+          expertCard.target = "_blank";
+          expertCard.className = "grid-item flex-col items-center";
+
+          const iconContainer = document.createElement("div");
+          iconContainer.className = "icon-container";
+
+          const icon = document.createElement("img");
+          icon.src = expert.image;
+          icon.alt = `${expert.name} Icon`;
+          icon.className = "icon";
+
+          const label = document.createElement("span");
+          label.id = `label-${expert.name.toLowerCase().replace(/ /g, "-")}`;
+          label.className = "label-text font-medium";
+          label.textContent = expert.name;
+
+          iconContainer.appendChild(icon);
+          expertCard.appendChild(iconContainer);
+          expertCard.appendChild(label);
+          expertsGrid.appendChild(expertCard);
+        } else {
+          console.error("Invalid expert data:", expert);
+        }
+      });
+    })
+    .catch((error) => console.error("Error fetching the experts data:", error));
+</script>
+
+<style>
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    cursor: pointer;
+  }
+
+  .grid-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    width: 250px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #121b2c;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .grid-item:hover {
+    transform: scale(1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .icon-container {
+    background-color: #3b3f8c;
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+  }
+
+  .icon {
+    width: 32px;
+    height: 32px;
+    filter: brightness(0) invert(1);
+    transition: transform 0.3s ease;
+  }
+
+  .grid-item:hover .icon {
+    transform: scale(1.1);
+  }
+
+  .label-text {
+    font-weight: 500;
+    align-items: center;
+    font-size: 14px;
+    transition: color 0.3s ease;
+    margin-top: 14px;
+  }
+
+  .grid-item:hover .label-text,
+  .icon-container:hover + .label-text {
+    color: #4f46e5;
+  }
+  .grid-item:hover .icon-container,
+  .icon-container:hover {
+    background-color: #4f46e5;
+  }
+
+  @media (max-width: 768px) {
+    .grid-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .icon {
+      width: 24px;
+      height: 24px;
+    }
+    .icon-container {
+      width: 48px;
+      height: 48px;
+    }
+    .grid-item {
+      height: 150px;
+      width: 150px;
+    }
+    .label-text {
+      font-weight: 400;
+      align-items: center;
+      font-size: 10px;
+
+      transition: color 0.3s ease;
+    }
+  }
+</style>

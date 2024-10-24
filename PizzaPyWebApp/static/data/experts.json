@@ -1,0 +1,44 @@
+{
+  "experts": [
+    {
+      "name": "Web Development",
+      "link": "https://www.facebook.com/groups/pizzapy.ph/",
+      "image": "../../../static/css/icons/web-off.svg"
+    },
+    {
+      "name": "Cloud Computing and DevOps",
+      "link": "https://www.facebook.com/groups/pizzapy.ph/",
+      "image": "../../../static/css/icons/clooud.svg"
+    },
+    {
+      "name": "Blockchain",
+      "link": "https://www.facebook.com/groups/pizzapy.ph/",
+      "image": "../../../static/css/icons/blockchain.svg"
+    },
+    {
+      "name": "Artificial Intelligence",
+      "link": "https://www.facebook.com/groups/pizzapy.ph/",
+      "image": "../../../static/css/icons/ai.svg"
+    },
+    {
+      "name": "Data Science and Analytics",
+      "link": "https://www.facebook.com/groups/pizzapy.ph/",
+      "image": "../../../static/css/icons/data.svg"
+    },
+    {
+      "name": "Game Development",
+      "link": "https://www.facebook.com/groups/pizzapy.ph/",
+      "image": "../../../static/css/icons/game.svg"
+    },
+    {
+      "name": "Internet of Things",
+      "link": "https://www.facebook.com/groups/pizzapy.ph/",
+      "image": "../../../static/css/icons/iot.svg"
+    },
+    {
+      "name": "System Design",
+      "link": "https://www.facebook.com/groups/pizzapy.ph/",
+      "image": "../../../static/css/icons/system.svg"
+    }
+  ]
+}
