@@ -32,24 +32,17 @@ def about_page(request):
 # BASE URL SETUP
 def get_redirect_uri(request):
     default_group_name = "pizzapy-ph"
-    current_location = request.build_absolute_uri()
 
-    if current_location.startswith("http://127.0.0.1:8001/"):
-        current_location = current_location.replace(
-            "http://127.0.0.1:8001/", "https://pizzapy.ph/"
-        )
-
-    parsed_url = urlparse(current_location)
-    path = parsed_url.path.rstrip("/")
+    path = request.path.rstrip("/")
     parts = path.split("/")
 
     if len(parts) >= 3:
         if len(parts) == 3:  # URL is like /events/upcoming-events
             parts.append(default_group_name)  # Append default group name
-        redirect_uri = "/".join(parts)  # Join all parts to form the redirect URI
-        return redirect_uri
+        path_to_join = "/".join(parts)
+        return request.build_absolute_uri(path_to_join)
     else:
-        return None  # Unable to determine redirect URI
+        return None
 
 
 # MEETUP TOKEN ACCESS
